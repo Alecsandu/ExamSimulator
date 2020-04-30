@@ -2,11 +2,13 @@ package admitere;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.lang.reflect.*;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Service choice = new Service();
+		choice.read();
 		Scanner scanner = new Scanner(System.in);
 		boolean continua = true;
 		do {
@@ -65,9 +67,8 @@ public class Main {
 				continua = false;
 			}
 		}while(continua);
-		
+		choice.save();
 		System.out.println("Va multumim pentru folosirea aplicatiei!");
-		
 		scanner.close();
 	}
 

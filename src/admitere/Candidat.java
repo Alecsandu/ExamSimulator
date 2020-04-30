@@ -5,6 +5,8 @@ public class Candidat {
 	private String CNP;
 	private int varsta;
 	
+	
+	
 	protected Candidat(String nume, String CNP, int varsta) {
 		this.numeCandidat = nume;
 		this.CNP = CNP;
@@ -38,5 +40,11 @@ public class Candidat {
 	@Override
 	public String toString() {
 		return "Candidat [numeCandidat=" + numeCandidat + ", CNP=" + CNP + ", varsta=" + varsta + "]";
+	}
+
+	/**
+	 * 
+	 */
+	protected Candidat() {
 	}
 }

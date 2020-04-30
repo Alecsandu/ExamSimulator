@@ -30,4 +30,13 @@ public class CandidatCTI extends Candidat{
 	public String toString() {
 		return "CandidatCTI [admited=" + admited + ", anul=" + anul + ", " + super.toString() + "]";
 	}
+
+	/**
+	 * @param nume
+	 * @param CNP
+	 * @param varsta
+	 */
+	protected CandidatCTI() {
+		
+	}
 }

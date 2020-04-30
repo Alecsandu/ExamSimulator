@@ -2,6 +2,7 @@ package admitere;
 
 import java.util.*;
 import java.math.*;
+import admitere.ManipulareDateCSV;
 
 public class Service {
 	Facultate facultatea;
@@ -26,6 +27,7 @@ public class Service {
 		int nrS = scan.nextInt();
 		scan.nextLine();
 		facultatea = new Facultate(nume, nrS);
+		Audit.write("Am creat o facultate.");
 	}
 	
 	public void inscrieCandidat() {
@@ -59,6 +61,7 @@ public class Service {
 		if (licenta.equals("CTI")) {
 			facultatea.getSala().adaugaCandidatCTI(new CandidatCTI(nume, cnp, varsta, new Admis(0), anul));
 		}
+		Audit.write("Am inscris un candidat.");
 	}
 	
 	public void stergeCandidat() {
@@ -96,6 +99,7 @@ public class Service {
 					itr.remove();
 			}
 		}
+		Audit.write("Am sters un candidat.");
 	}
 	
 	public void sorteazaCandidatii() {
@@ -112,6 +116,7 @@ public class Service {
 		if (nume.equals("CTI")) {
 			Collections.sort(facultatea.getSala().getCandCTI(), (a, b) -> a.getNume_candidat().compareTo(b.getNume_candidat()));
 		}
+		Audit.write("Am sortat candidatii.");
 	}
 	
 	public void testCandidati() {
@@ -143,6 +148,7 @@ public class Service {
 				i.getAdmited().setNota(x);
 			}
 		}
+		Audit.write("Am testat candidatii.");
 	}
 	
 	public void afiseazaCandidatii() {
@@ -152,12 +158,14 @@ public class Service {
 			System.out.println(i.getNume_candidat());
 		for(Candidat i : facultatea.getSala().getCandCTI())
 			System.out.println(i.getNume_candidat());
+		Audit.write("Am afisat candidatii.");
 	}
 	
 	public void afiseazaSupraveghe() {
 		for(Supraveghetor i:facultatea.getSala().getSupraveghetori()) {
 			System.out.println(i.toString());
 		}
+		Audit.write("Am afisat supraveghetorii.");
 	}
 	
 	public void arataInformatii() {
@@ -188,6 +196,7 @@ public class Service {
 				}
 			}
 		}
+		Audit.write("Am cautat informatii despre un candidat.");
 	}
 	
 	public void adaugaSupraveghetor() {
@@ -195,8 +204,8 @@ public class Service {
 		Scanner scan = new Scanner(System.in);
 		String numeS = scan.nextLine();
 		scan.nextLine();
-		
 		facultatea.getSala().getSupraveghetori().add(new Supraveghetor(numeS));
+		Audit.write("Am adaugat un nou supraveghetor.");
 	}
 	
 	public void verificaCandidatii() {
@@ -234,5 +243,34 @@ public class Service {
 			System.out.println("Am gasit " + nr + " candidati care au incercat sa copieze");
 		else
 			System.out.println("Nu avem candidati care copiaza");
+		Audit.write("Am verificat candidatii.");
+	}
+	
+	public void save() {
+		if (!this.facultatea.getSala().getCandMate().isEmpty()) {
+			ManipulareDateCSV.getInstance().write(this.facultatea.getSala().getCandMate(), "CandidatiMate.csv");
+		}
+		if(!this.facultatea.getSala().getCandInfo().isEmpty()) {
+			ManipulareDateCSV.getInstance().write(this.facultatea.getSala().getCandInfo(), "CandidatiInfo.csv");
+		}
+		if(!this.facultatea.getSala().getCandCTI().isEmpty()) {
+			ManipulareDateCSV.getInstance().write(this.facultatea.getSala().getCandCTI(), "CandidatiCTI.csv");
+		}
+		if(!this.facultatea.getSala().getSupraveghetori().isEmpty()) {
+			List<Supraveghetor> temp = new ArrayList<Supraveghetor>();
+			for (Supraveghetor x : this.facultatea.getSala().getSupraveghetori()) {
+				temp.add(x);
+			}
+			ManipulareDateCSV.getInstance().write(temp, "Supraveghetori.csv");
+		}
+	}
+	
+	public void read() {
+		ArrayList<CandidatMate> candidatiM = new ArrayList<CandidatMate>();
+		ManipulareDateCSV.getInstance().read(candidatiM, "CandidatiMate.csv");
+		ArrayList<CandidatInfo> candidatiI = new ArrayList<CandidatInfo>();
+		ManipulareDateCSV.getInstance().read(candidatiI, "CandidatiInfo.csv");
+		ArrayList<CandidatCTI> candidatiC = new ArrayList<CandidatCTI>();
+		ManipulareDateCSV.getInstance().read(candidatiC, "CandidatiCTI.csv");
 	}
 }

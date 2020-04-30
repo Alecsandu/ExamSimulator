@@ -30,4 +30,7 @@ public class CandidatMate extends Candidat{
 	public String toString() {
 		return "CandidatMate [Admis=" + admited.getNota() + ", anul=" + anul + ", " + super.toString() + "]";
 	}
+
+	protected CandidatMate() {
+	}
 }
