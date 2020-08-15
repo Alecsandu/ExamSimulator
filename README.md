@@ -1,2 +1,2 @@
 # Proiect-PAO
-Acesta este proiectul meu la PAO(programare avansata pe obiecte)
+Proiectul pentru PAO(programare avansata pe obiecte)
