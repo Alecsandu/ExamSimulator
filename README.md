@@ -1,2 +1,2 @@
-# Proiect-PAO
-Proiectul pentru PAO(programare avansata pe obiecte)
+# AOP - Project
+This is the project for the Advanced object programming course.
