@@ -1,2 +1,2 @@
 # AOP - Project
-This is the project for the Advanced object programming course.
+This is my project for the Advanced object programming course.
